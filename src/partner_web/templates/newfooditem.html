@@ -1,0 +1,87 @@
+$def with(elem_subm,return_url)
+<!DOCTYPE html>
+<html>
+<head>
+	<title>新菜谱</title>
+	<link rel="stylesheet" type="text/css" href="/static/easyui/js/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/static/easyui/js/themes/icon.css">
+	<script type="text/javascript" src="/static/easyui/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/easyui/js/jquery.easyui.min.js"></script>
+        <script type="text/javascript" src="/static/easyui/js/locale/easyui-lang-zh_CN.js"></script>
+	<style type="text/css">
+		label{width:100px;display:block;float:left;}
+		form div{padding:3px 0;}
+	</style>
+	<script type="text/javascript">
+		$$(function(){
+		
+			$$('#ff').form({
+				onSubmit:function(){
+					return $$(this).form('validate');
+				},
+				success:function(data){
+					$$.messager.alert('操作提示', data, 'info',function(){
+						if(data.indexOf('成功')!=-1){
+						   location.href='$return_url'						
+						}		
+					});
+				}
+			});
+		});
+	</script>
+</head>
+<body>
+
+	<div>
+	    <form id="ff" method="POST" enctype="multipart/form-data" action="">
+	        <div>
+
+	            <label for="name">菜名:</label>
+	            <input class="easyui-validatebox" type="text" name="name" id="name" required="true" />
+	        </div>
+	        <div>
+	            <label for="cid">分类:</label>
+	            <input class="easyui-combobox" 
+						name="cid"
+						url="index?m=food&act=category&dtype=2" 
+						valueField="id" 
+						textField="name" 
+						panelHeight="auto"/>
+	        </div>
+	        <div>
+	            <label for="pic">图片:</label>
+	            <input type="file" name="pic" id="pic1" value=""/>
+	        </div>
+	        <div>
+	            <label for="price">价格:</label>
+		    <input class="easyui-numberbox" type="text" name="price" id="price" precision="2" style="width:50px" value="10"/>元
+	        </div>
+		<div>
+	            <label for="percent">优惠折扣:</label>
+		    <input class="easyui-numberbox" type="text" min="0" id="percent" max="100" value="100" name="percent" required="num" style="width:50px"/>%
+	        </div>
+		<div>
+	            <label>供应分店:</label>
+		    $:elem_subm
+	        </div>
+
+		<div>
+
+	            <label for="note">备注:</label>
+	            <input type="text" name="note" id="note" style="width:250px"/>&nbsp;如："优惠仅限3日",20字内
+	        </div>
+		<div>
+
+	            <label for="desc">描述:</label>
+	            <textarea name="desc" style="height:60px;" id="desc"></textarea>
+	        </div>
+
+	        <div>
+	            <label>&nbsp;</label>
+	            <input type="submit" value="提交" />
+	        </div>
+	    </form>
+	</div>
+	
+</body>
+</html>

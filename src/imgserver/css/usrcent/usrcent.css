@@ -1,0 +1,46 @@
+
+body{margin:0;font-size:14px;color:#333;background:#f0f0f0;}
+.f12{font-size:12px;}
+.clearfix{clear:both;}
+.center{text-align:center;}
+
+.topwrap{background:url(bgtiao.png) repeat-x;height:30px;overflow:hidden;line-height:30px;}
+a:link,a:visited{color:#0066cc;text-decoration:none;}
+a:hover{color:#006699;}
+#top{width:960px;margin:0 auto;position:relative;}
+#top .nav{position:absolute;left:300px;top:2px;line-height:28px;}
+#top .usr{position:absolute;right:0;top:0;font-size:12px;color:#d0d0d0}
+#top .nav li{}
+#top .nav a{display:block;color:white;float:left;padding:0 5px;margin:0 1px;text-decoration:none;}
+#top .nav a:hover,#top .nav a.current{background:#f0f0f0;color:black;}
+#top #usrinfo{color:white;}
+#top a{color:white;}
+
+h1.sys{font-size:16px;font-weight:bold;color:white;margin:0;height:28px;overflow:hidden;padding:0;text-align:center;font-family:'微软雅黑';background:#333;width:100px;}
+
+#main{width:960px;margin:10px auto;background:white;overflow:hidden;border-top:solid 1px #79959a;}
+#main .side{width:180px;margin-right:-180px;float:left;height:450px;}
+#main .main{width:auto;margin:10px 0 0 200px;padding-right:20px;}
+#main .side{background:#f5f5f5;}
+#main .side,#main .main{padding-bottom:1500px;margin-bottom:-1500px;}
+
+#footer{width:900px;margin:0 auto;text-align:center;color:#333;}
+
+#main .side .title{font-size:14px;font-weight:bold;color:#0078b6;line-height:30px;padding-left:20px;}
+#main .side ul{font-size:12px;list-style:none;margin:5px 0;padding:0 0 10px 0;border-bottom:solid 1px white;}
+#main .side ul a{display:block;padding:0 10px 0 30px;line-height:20px;}
+#main .side ul li.selected a{background:#006699;color:white;}
+
+
+/*******************************/
+.avatar{border:solid 1px #e0e0e0;padding:5px;width:120px;height:120px;overflow:hidden;}
+.avatar img{width:120px;height:120px;}
+
+
+.paged{text-align:center;margin:5px 0;}
+.paged a,.paged span.current{margin:0 5px;}
+
+.tb{background:#555;font-size:12px;line-height:20px;width:100%;border-top:solid 1px #666;}
+.tb th{color:white;background:white url(bgtiao.png) repeat-x;padding:0 2px;}
+.tb td{background:white;padding:0 2px;text-align:center;}
+.tdred{color:red;text-align:center;font-size:12px;}

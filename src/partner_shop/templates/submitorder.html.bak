@@ -1,0 +1,112 @@
+$def with(cartinfo,tt_fee,partner,tpl,member)
+<!doctype html>
+<html>
+<head>
+	<title>确认订单--网上订餐系统</title>
+	<link rel="Stylesheet" href="http://www.xcydg.com/style/common.css" type="text/css" />
+	<link rel="Stylesheet" href="http://www.xcydg.com/style/css/style.css" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="http://img.$tpl.host/shop/style/wly/wly.css"/>
+	<script type="text/javascript" src="http://img.$tpl.host/scripts/global.js"></script>
+<style type="text/css">
+		h1{color:#018116;margin:30px;font-size:16px;font-family:'微软雅黑';text-align:center;border-bottom:dotted 1px #e5e5e5;padding-bottom:20px;}
+		div.member{font-size:14px;margin:20px 0;}
+		div.order,div.profile{margin-left:250px;}
+		h2.title{color:#7ec07f;font-size:14px;}
+		span.money{color:green;}
+		p.money{font-size:14px;font-weight:bold;color:green;}
+		p.menu{line-height:18px;margin:0;padding-left:5px;}
+		.ipt{width:300px;border:solid 1px #e0e0e0;}
+		label{width:80px;display:block;float:left;}
+		p.menu{border:dotted 1px #7ec07f;padding:10px;width:450px;background:#fafef6;}
+		.logintip{font-size:14px;}
+		.backhome{font-size:14px;color:#006699;margin-left:30px;}
+	</style>
+</head>
+<body>
+
+<div id="top">
+  <a class="logo" href="http://www.xcydg.com"></a>
+  <div id="logo" onclick="location.href='/'" style="cursor:pointer;"></div>
+  <div class="toplink">
+   <span class="userstate">
+		$:tpl.header_user_part(partner)
+   </span>
+   <a href="http://www.xcydg.com/service/tuanshan.html">团膳服务</a>
+   <a href="http://www.xcydg.com/about/contact.html">联系我们</a>
+
+   <a href="http://www.xcydg.com/about/aboutus.html"><span style="color:green">关于万绿园</span></a>
+</div>
+<div id="navigator"><div class="left"></div><div class="right"></div><div class="navs"> <ul> <li class="current"><a href="/" target="">首页</a></li><li><a href="http://dc.xcydg.com" target="_blank"><span style="color:orange">在线订餐</span></a></li><li><a href="/yingyang/" target="">膳食营养</a></li><li><a href="/service/tuanshan.html" target="">餐饮服务</a></li><li class="last"><a href="http://mall.yyc668.com" target="_blank">商城</a></li> </ul> <div class="clearfix"></div> </div> </div>
+
+
+
+
+<div id="main" style="">
+		<h1>最后一步：请填写配送信息完成订单</h1>
+
+
+<div class="order">
+    <h2 class="title">» 订单信息</h2>
+     <p class="menu">
+     $:cartinfo
+     </p>
+     <p class="money">本次订餐总金额为：<span class="money">￥$tt_fee</span> 元</p>
+	
+     
+</div><br />
+<div class="profile">
+
+$if member!=None:
+	<h2 class="title">» 填写配送信息</h2>
+	<form action="/order" method="post">
+		<div style="color:green">您已经登录，将使用默认配送信息，如果需要修改配送地址请登录用户中心.<br /></div>
+		<p><label>送餐地址：</label>
+			$member['address']
+		</p>
+	
+		<p><label>联系电话：</label>
+			$member['phone']
+		</p>
+		
+		<p><label>备注：</label>
+			<textarea name="note" rows="3" class="ipt"></textarea>
+		</p>
+		
+		<p><label>&nbsp;</label>
+			<input type="button" value="提交" onclick="return chk();"/>
+			<a href="/" class="backhome">回到首页修改订单 >> </a>
+		</p>
+	</form>
+$else:
+	<div class="member">
+		 <p>注册会员可以免去重复输入的烦恼，更有优惠多多！还等什么，赶快注册吧！</p>
+		 <p>已经是会员？<a href="login.html?returnuri=/order">登录</a>&nbsp;或&nbsp;<a href="/user/register.html?returnURI=/order" target="_blank">注册</a></p>
+	</div>
+	
+</div>
+</div>
+
+<div class="clearfix"></div>
+
+<div id="footer">
+Copyright 2012 © 佛山市万绿园餐饮管理有限公司       全国统一客服热线：400-678-8888
+<!-- 网站标语-->&nbsp;&nbsp;
+</div>
+
+
+<script type="text/javascript">
+  function chk(){
+	j.form.asyncSubmit(0,false);
+	return false;
+	/*
+	var addr=document.getElementById('address'),
+	    phone=document.getElementById('phone');
+	var result=addr.value != ''&& phone.value != '';
+	if(!result){alert('请填写地址和联系电话！');return false;}
+	else{
+		j.asyncSubmitForm(0,false);
+	}*/
+  }
+</script>
+</body>
+</html>

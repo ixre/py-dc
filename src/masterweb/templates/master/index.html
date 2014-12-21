@@ -1,0 +1,92 @@
+$def with()
+<!DOCTYPE html>
+<html>
+	<head>
+	<title>餐饮管理系统</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/common.css" />
+	<link rel="stylesheet" type="text/css" href="/static/css/myplat.css" />
+	</head>
+<body>
+	<div id="top">
+		<div class="logo">订餐系统控制台</div>
+		<div class="tabs">
+			<a href="#" class="selected" onclick="chm(this,0)">系统信息</a>
+			<a href="#" onclick="chm(this,1)">商家管理</a>
+			<a href="#" onclick="chm(this,2)">通讯录</a>
+			<a href="#" onclick="chm(this,3)">设置</a>
+			<a href="http://www.ops.cc" target="fr">主页</a>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div id="main">
+		<div class="menu">
+			<ul id="menulinks">
+				<li><a href="#" class="current">菜单加载中...</a></li>
+			</ul>
+		</div>
+		<div id="quickbar">快速菜单
+			<p style="height:100px"></p>
+		</div>
+
+		<div id="frame">
+			<iframe src="account?action=state" frameborder="0" name="fr"></iframe>
+		</div>	
+	</div>
+	
+	<script type="text/javascript">
+		function fixheight(){
+			var _h=document.documentElement.clientHeight
+				-document.getElementById('top').offsetHeight;
+			document.getElementById('frame').style.height=(_h-2)+'px';
+		}
+		//setInterval(fixheight,10);
+		fixheight();
+		window.onresize=fixheight;
+		
+		var menus=[
+			[{u:'account?action=state',t:'账户状态'},{u:'',t:''}],
+			[{u:'pattern/new',t:'添加商家'}],
+			[{u:'#',t:'我的联系人'},{u:'#',t:'新增联系人'},{u:'#',t:'分组管理'},{u:'#',t:'采集手机号码'}],
+			[{u:'webapi',t:'集成接口'},{u:'account?action=profile',t:'修改资料'},{u:'account?action=password',t:'修改密码'}]
+		];
+		
+		
+		function chm(t,idx){
+			var __ms=t.parentNode.getElementsByTagName('a');
+			for(var i=0;i<__ms.length;i++){
+				if(i==idx){
+					__ms[i].className='selected';
+					loadmenu(idx);
+				}else{
+					__ms[i].className='';
+				}
+			}
+		}
+		
+		var __mp=document.getElementById('menulinks');
+			
+		function shm(t){
+			var __ml=__mp.getElementsByTagName('a');
+			for(var i=0;i<__ml.length;i++){
+				__ml[i].className=__ml[i]==t?'current':'';
+			}
+		}
+		
+		function loadmenu(idx){
+			var __htm='';
+			__mp.innerHTML='';
+			
+			for(var e in menus[idx]){
+				var elem=document.createElement('LI');
+				__htm='<a target="fr" onclick="shm(this)" href="'+menus[idx][e].u+'"';
+				if(e==0)__htm+=' class="current"';
+				__htm+='>'+menus[idx][e].t+'</a>';
+				elem.innerHTML=__htm;
+				__mp.appendChild(elem);
+			}
+		}
+		loadmenu(0);
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+$def with(dataurl,subs_json)
+<!DOCTYPE html>
+<html>
+<head>
+	<title>订单管理</title>
+	<link rel="stylesheet" type="text/css" href="/static/easyui/js/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/static/easyui/js/themes/icon.css">
+	<script type="text/javascript" src="/static/easyui/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/easyui/js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/static/easyui/js/locale/easyui-lang-zh_CN.js"></script>
+	<script>
+		var subs=$:subs_json;
+
+		$$(function(){
+			var lastIndex;
+			var elem=$$('#tt');
+			elem.datagrid({
+				columns:[[
+					{field:'id',title:'订单号',width:110,align:'center'},
+					{field:'itemsinfo',title:'菜单',width:250,align:'center',formatter:function(value,rec){return value.replace(/\r\n/g,'<br />');}},
+					{field:'ptsid',title:'配送店',width:60,align:'center',
+						formatter:function(value,rec){
+							if(value!=0){
+								for(var i=0;i<subs.length;i++){
+								    if(subs[i].id==value){return subs[i].name;}
+								}
+							}
+							return '-';
+							//return '<a href="index?m=order&act=edit&orderid='+rec.id+'&returnuri='+encodeURIComponent(location.href)+'#sub">设置</a>';
+						}						
+					},
+					{field:'pay',title:'订单金额',width:60,sortable:true,align:'center',
+						sorter:function(a,b){
+							return (a>b?1:-1);
+						},
+						formatter:function(value,rec){return '￥'+value+'<br />(<span style="font-size:10px">'+(rec.paymethod=='1'?'餐到付款':'网上支付')+'</span>)';}
+					},
+					
+
+					{field:'note',title:'备注',width:155,align:'center'},
+					{field:'sendtime',title:'送餐时间',width:150,align:'center',
+						formatter:function(v,r){return '创建时间:<br />'+r.createtime+'<br />送餐时间：<br />'+r.sendtime;}//+'<br />更新：'+r.updatetime;}
+					},
+					{field:'id1',title:'操作',width:80,align:'center',
+						formatter:function(v,r){
+							var html='';
+							if(r.status!=-1){ 
+								html+='<a href="javascript:edit(\''+r.id+'\')">设置</a> | ';
+								html+='<a href="javascript:del(\''+r.id+'\')">作废</a>';
+							}else{
+								html='-';
+							}
+							return html;
+						}
+					}
+				]],
+
+				onBeforeLoad:function(){
+					$$(this).datagrid('rejectChanges');
+				},
+				onClickRow:function(rowIndex){
+					
+					if (lastIndex != rowIndex){
+						elem.datagrid('endEdit', lastIndex);
+						elem.datagrid('beginEdit', rowIndex);
+					}
+					lastIndex = rowIndex;
+				}
+			});
+
+			
+		});
+
+		function del(id){
+			$$.messager.confirm('操作提示', '您确定要将此订单作废吗？',function(r){
+				if(r){
+			        $$.ajax({
+					url:'index',
+					data:'m=order&act=del&id='+id,
+					type:'POST',
+					success:function(){$$('#tt').datagrid('reload');}
+				   });
+				}
+			});
+		}
+		function edit(id){
+			location.replace('index?m=order&act=view&id='+id+'&returnuri='+encodeURIComponent(location.href));
+		}
+	</script>
+</head>
+<body>
+	<table id="tt" style="width:900px;height:auto;"  singleSelect="true"
+			pagination="true" rownumbers="true"
+			idField="id" url="$dataurl"
+			pageList="[6,10,15]"	
+			>
+	</table>
+</body>
+</html>

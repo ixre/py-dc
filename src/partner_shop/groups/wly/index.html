@@ -1,0 +1,156 @@
+$def with(tpl,partner,subs,ele_cate,ele_food,cuporn_foods)
+<!DOCTYPE html>
+<html>
+<head>
+    <title>$:partner['name']网络餐厅-全力打造商务营养餐中国第一品牌-快速实现营养平民化</title>
+    <link rel="Stylesheet" href="http://www.xcydg.com/style/common.css" type="text/css" />
+    <link rel="Stylesheet" href="http://www.xcydg.com/style/css/style.css" type="text/css" />
+    <link rel="Stylesheet" href="http://img.$tpl.host/shop/style/wly/wly.css" type="text/css" />
+    <script type="text/javascript" src="http://img.$tpl.host/scripts/global.js"></script>
+    <script type="text/javascript" src="http://img.$tpl.host/scripts/cart.js"></script>
+</head>
+<body>
+    <div id="top">
+        <a class="logo" href="http://www.xcydg.com"></a>
+
+
+        <div id="logo" onclick="location.href='/'" style="cursor: pointer;">
+        </div>
+        <div class="toplink">
+            <span class="userstate">您好，欢迎您光临！<a href="/user/register.html">注册</a> | <a href="/login.html">
+                登录</a> </span><a href="http://www.xcydg.com/service/tuanshan.html">团膳服务</a>
+            <a href="http://www.xcydg.com/about/contact.html">联系我们</a> <a href="http://www.xcydg.com/about/aboutus.html">
+                <span style="color: green">关于$:partner['name']</span></a>
+        </div>
+        <div id="navigator">
+            <div class="left">
+            </div>
+            <div class="right">
+            </div>
+            <div class="navs">
+                <ul>
+                    <li class="current"><a href="http://www.xcydg.com" target="">首页</a></li>
+                    <li><a href="http://dc.xcydg.com" target="_blank"><span style="color: orange">在线订餐</span></a></li>
+                    <li><a href="http://www.xcydg.com/yingyang/" target="">膳食营养</a></li>
+                    <li><a href="http://www.xcydg.com/branch/" target="">服务网点</a></li>
+                    <li class="last"><a href="http://www.xcydg.com/shop.html" target="_blank">商城</a></li>
+                </ul>
+                <div class="clearfix">
+                </div>
+            </div>
+        </div>
+  
+
+  </div>
+   <div id="main">
+            <div class="content">
+                <!-- 侧栏内容 -->
+                <div class="side" id="sidecontainer">
+                    <div id="plcart">
+                        <h3>
+                            我的餐盒</h3>
+                        <div class="cart">
+                        </div>
+                        <div class="center">
+                            <a class="submit" href="/order" title="提交订单">提交订单</a></div>
+                    </div>
+       
+                    <div>
+                        <a href="http://www.xcydg.com/go.html?pos=dcindex1" target="_blank">
+                            <img src="http://www.xcydg.com/uploads/image/201304/dc_index1.gif" alt="" /></a>
+                        <a href="http://www.xcydg.com/go.html?pos=dcindex1" target="_blank">
+                            <img src="http://www.xcydg.com/uploads/image/201304/dc_index2.gif" alt="" /></a>
+                    </div>
+                </div>
+                <!-- 结束侧栏 -->
+                <div class="main">
+                    <!-- 主要内容在这里 -->
+                    <div class="cuporn">
+                        <div class="fl">
+                            <h2 id="c6">
+                                今日特惠</h2>
+                        </div>
+                        $:cuporn_foods
+                        <div class="clearfix">
+                        </div>
+                    </div>
+
+
+                    <div class="tab">
+                        <ul>
+                            <li><a href="#c0" class="select">全部</a></li>
+                            $:ele_cate
+                        </ul>
+                    </div>
+                    <div class="clearfix">
+                    </div>
+                    <!-- menu开始 -->
+                    <div id="menu">
+                        <div class="container1">
+                            <div class="t_yellow_tips  clearfix">
+                                <p>
+                                    提示：由于物价变动，部分菜品、价格可能有变，详情请以电话确认为准。</p>
+                            </div>
+                            $:ele_food
+                            <div id="fditems">
+                                <div class="" style="text-align: center; height: 32px; padding: 80px 0 0 150px">
+                                    <img src="http://img.$tpl.host/shop/x1/images/loadingapple.gif" style="width: 32px;
+                                        height: 32px" class="fl" />
+                                    <span class="fl" style="padding: 10px 10px; display: inline-block; color: #acacac;">
+                                        加载中，请稍后…</span></div>
+                            </div>
+                            <script type="text/javascript">
+                                j.ajax.post('?', 'action=getitems', function (x) {
+                                    j.$$('fditems').innerHTML = x;
+                                }, function (x) { j.$$('fditems').innerHTML = '加载失败'; });			
+			</script>
+                        </div>
+                    </div>
+                    <!--menu关闭-->
+                    <!-- 主要内容结束 -->
+                </div>
+            </div>
+            <div class="bottom">
+            </div>
+            <div class="clearfix">
+            </div>
+        </div>
+        <!-- 页脚文件 -->
+        <div id="footer">
+            Copyright 2012 © 佛山市蚁族餐饮管理有限公司 全国统一客服热线：$:partner['tel']
+        </div>
+        <script type="text/javascript">
+            var plcart = document.getElementById('plcart');
+            function fixCartBasket() {
+                setInterval(function () {
+                    if (document.documentElement.scrollTop > 20) {
+                        document.getElementById('plcart').style.top = '0px'
+                    } else {
+                        if (plcart.style.display == 'block') {
+                            document.getElementById('sidecontainer').style.padding = (plcart.offsetHeight - 20) + "px 0 0 0"
+                        }
+                        document.getElementById('plcart').style.top = '130px'; //'78px'
+                    }
+                }, 5);
+            }
+            cart.init(plcart.id, false);
+            fixCartBasket();
+
+
+            function totop() {
+                var _top;
+                var _time = document.documentElement.scrollTop / 8;
+                var t = setInterval(function () {
+                    _top = document.documentElement.scrollTop;
+                    if (_top > 0) {
+                        document.documentElement.scrollTop = _top - _time;
+                    } else {
+                        clearInterval(t);
+                    }
+
+                }, 10);
+            }
+
+</script>
+</body>
+</html>

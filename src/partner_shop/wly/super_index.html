@@ -1,0 +1,82 @@
+$def with(tpl,count)
+<html>
+<head>
+<title>佛山蚁族网络科技有限公司</title>
+<style type="text/css">
+ #dc{position:absolute;right:300px;top:30px;display:block;padding:35px 20px;background:red;width:100px;opacity:0;filter:alpha(opacity=0);}
+ #mall{position:absolute;right:170px;top:30px;display:block;padding:35px 20px;background:red;width:100px;opacity:0;filter:alpha(opacity=0);}
+.clearfix{clear:both;}
+.items{background:#f0f0f0;padding:10px 0 10px 13px;}
+.items ul{margin:0;list-style:none;padding:0;}
+.items li{float:left;margin-right:13px;}
+.items li img{width:228px;height:171px;border:none;}
+#footer{text-align:center;margin:0 0 10px 0;font-size:14px;color:#666;}
+#footer a{color:#0066cc;text-decoration:none;}
+#footer a:hover{color:#006699;text-decoration:underline;}
+</style>
+<script type="text/javascript" src="http://img.$tpl.host/scripts/global.js"></script>
+</head>
+<body style="margin:0;text-align:center;">
+
+<div style="width:980px;margin:0 auto;position:relative;">
+
+<a href="/index" id="dc" target="_blank"></a>
+<a href="http://mall.yyc668.com" target="_blank" id="mall"></a>
+
+<div><img src="http://img.$tpl.host/shop/style/wly/index/top_1.jpg"/>
+			<div style="height:344px;overflow:hidden" id="td1">
+				<img src="http://img.$tpl.host/shop/style/wly/index/top_2.jpg"/>
+				<!--<img src="http://img.$tpl.host/shop/style/wly/index/top_2_2.jpg"/>
+				<img src="http://img.$tpl.host/shop/style/wly/index/top_2.jpg"/>-->
+			</div>
+			
+			<img src="http://img.$tpl.host/shop/style/wly/index/top_3.jpg"/><img src="http://img.$tpl.host/shop/style/wly/index/top_4.jpg"/>
+
+</div>
+
+<div class="items">
+	<ul>
+		<li><a href="http://www.wanglaoji.com"><img src="http://img.$tpl.host/shop/style/wly/index/t_item1.jpg"/></a></li>
+		<li><a href="http://www.tmall.com" target="_blank"><img src="http://img.$tpl.host/shop/style/wly/index/t_item2.jpg"/></a></li>
+		<li><a href="http://www.lining.com" target="_blank"><img src="http://img.$tpl.host/shop/style/wly/index/t_item3.jpg"/></a></li>
+		<li><a href="http://www.geli.com" target="_blank"><img src="http://img.$tpl.host/shop/style/wly/index/t_item4.jpg"/></a></li>
+	</ul>
+	
+<div class="clearfix"></div>
+</div>
+
+<div>
+	<img src="http://img.$tpl.host/shop/style/wly/index/top_5.jpg" /></div>
+
+<div  class="items">
+	<ul>
+
+		<li><a href="#"><img src="http://img.$tpl.host/shop/style/wly/index/t_item5.jpg"/></a></li>
+		<li><a href="http://www.360buy.com" target="_blank"><img src="http://img.$tpl.host/shop/style/wly/index/t_item6.jpg"/></a></li>
+		<li><a href="http://www.tebu.com" target="_blank"><img src="http://img.$tpl.host/shop/style/wly/index/t_item7.jpg"/></a></li>
+		<li><a href="http://www.media.com.cn" target="_blank"><img src="http://img.$tpl.host/shop/style/wly/index/t_item8.jpg"/></a></li>
+	</ul>
+	<div class="clearfix"></div>
+</div>
+
+
+
+<div id="footer">
+	 <p><a  href="/about">关于我们</a>|<a  href="#">联系我们</a>|<a href="#">餐馆加盟</a>|<a href="#">加入我们</a>|<a href="#">重要声明</a>|<a href="#">友情链接</a>|<a href="#">博客</a>|<a href="#" style="margin-right:0;">帮助中心</a></p>
+     <p class="copyright">&copy;2012&nbsp;万绿园&nbsp;&nbsp;
+     
+     <!--<a href="http://www.miibeian.gov.cn/" rel="nofollow" target="_blank">沪ICP备83016235号</a>
+     -->
+
+	&nbsp;&nbsp;今日共访问$:count[1]次，当前在线：会员:$:count[2]人，游客：$:count[3]
+	
+     </p>
+
+</div>
+
+</div>
+			<script type="text/javascript">
+				/*new divScroller(document.getElementById('td1'), 1, 344, 2000).start();*/
+			</script>
+</body>
+</html>

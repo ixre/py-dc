@@ -1,0 +1,130 @@
+$def with(host,returnURI)
+<!doctype html>
+<html>
+<head>
+	<title>用户注册</title>
+	<link rel="stylesheet" type="text/css" href="http://img.$host/shop/style/wly/wly.css"/>
+	<link rel="stylesheet" type="text/css" href="http://img.$host/css/validator.css"/>
+	<link rel="Stylesheet" href="http://www.xcydg.com/style/common.css" type="text/css" />
+	<link rel="Stylesheet" href="http://www.xcydg.com/style/css/style.css" type="text/css" />
+	<script type="text/javascript" src="http://img.$host/scripts/global.js"></script>
+	<script type="text/javascript" src="http://img.$host/scripts/validator.js"></script>
+	
+	<style type="text/css">
+		body{background:none;}
+		#regpanel{width:650px;margin:30px auto 50px auto;}
+		h1{color:#7ec07f;font-size:18px;border-bottom:dotted 1px #e5e5e5;line-height:50px;
+		font-weight:bold;font-family:'微软雅黑';padding-left:10px;margin-bottom:20px;}
+		p{font-size:14px;}
+		p label{width:90px;display:block;float:left;padding-left:10px;}	
+		p input.input{width:200px;}
+		p span.tip{font-size:12px;color:#666;}
+		.reg span{margin-left:20px;}
+	</style>
+	
+</head>
+<body>
+
+
+<div id="top">
+  <a class="logo" href="http://www.xcydg.com"></a>
+  <div id="logo" onclick="location.href='/'" style="cursor:pointer;"></div>
+  <div class="toplink">
+   <a href="http://www.xcydg.com/service/tuanshan.html">团膳服务</a>
+   <a href="http://www.xcydg.com/about/contact.html">联系我们</a>
+
+   <a href="http://www.xcydg.com/about/aboutus.html"><span style="color:green">关于万绿园</span></a>
+</div>
+<div id="navigator"><div class="left"></div><div class="right"></div><div class="navs"> <ul> <li class="current"><a href="/" target="">首页</a></li><li><a href="http://dc.xcydg.com" target="_blank"><span style="color:orange">在线订餐</span></a></li><li><a href="/yingyang/" target="">膳食营养</a></li><li><a href="/service/tuanshan.html" target="">餐饮服务</a></li><li class="last"><a href="http://mall.yyc668.com" target="_blank">商城</a></li> </ul> <div class="clearfix"></div> </div> </div>
+
+
+
+
+<div id="main" style="background:none">
+    <div class="clearfix sitemap">»&nbsp;网站首页 > 会员注册</div>
+	<div id="regpanel" class="reg">
+	<h1>注册会员</h1>
+	
+	<form method="post">
+		<input type="hidden" name="returnURI" value="$returnURI" />
+		<p>
+			<label>用户名</label>
+			<input class="input" type="text" name="username" id="username" err="用户名{0:不能为空,1:必须以字母开头,2:长度为4-15位,3:为字母或数字的组合,4:已被占用}"/><span class="tip">用户名为4-15位以字母开头的数字和字母的组合</span>
+		</p>
+		<p>
+			<label>密码</label>
+			<input class="input" type="password" name="password" id="password" err="密码{0:不能为空,1:首尾不能为下划线,2:长度为6-12位,3:格式输入有误}"/><span class="tip">为保证帐号安全，请使用较为复杂的密码</span>
+		</p>
+		<p>
+			<label>重复密码</label>
+			<input class="input" type="password" id="repassword" /><span class="tip">再输入一遍密码</span>
+		</p>
+		<p>
+			<label>性别</label>
+			<input type="radio" name="sex" value="male" checked="checked"/>男&nbsp;<input type="radio" name="sex" value="female"/>女
+		</p>
+		<p>
+			<label>手机号码</label>
+			<input class="input" type="text" id="phone" name="phone" err="手机号码{0:不正确,1:已被使用,2:不能为空}"/><span class="tip">送餐联系电话,请正确填写</span>
+		</p>
+		<p>
+			<label>所在地址</label>
+			<input class="input" type="text" id="address" name="address" err="地址{0:不能为空,1:需详细到门牌号}" /><span class="tip">如：上海市徐汇区斜土路300号飞雕大厦1201室</span>
+		</p>
+		<p>
+			<label>推荐人用户名</label>
+			<input class="input" type="text" id="tguser" name="tguser" err="推荐人{0:错误或数量已达上限,1:不能为空}"/><span class="tip">填写推荐人的用户名,如无推荐人请填写<b style="color:#006699">lin</b></span>
+		</p>
+		
+		
+		<p><label>&nbsp;</label>
+			<input type="button" value="&nbsp;注册&nbsp;" onclick="chk()"/>&nbsp;
+			<input type="reset" value="&nbsp;重置&nbsp;"/>
+		</p>
+	</form>
+	<script type="text/javascript">
+	function $$(id){return document.getElementById(id);}
+	var uid=$$('username'),
+		pwd=$$('password'),
+		repwd=$$('repassword'),
+		email=null,
+		qq=null,
+		phone=$$('phone'),
+		address=$$('address'),
+		tguser=$$('tguser'),
+		nick=null,
+		birthday=null,
+		realname=null,
+		cardnumber=null;
+	function chk(){
+		if(valid.check(document.getElementById('regpanel'))){
+			j.form.asyncSubmit(0, location.href.indexOf('debug')!=-1);
+		}else{alert('请填写完整注册资料！');}
+	}
+
+	function error(msg){
+		alert(msg);
+	}
+	function regsucc(){
+	    var uri=document.getElementsByName('returnURI')[0].value;
+	    location.replace(uri+'/user/regfinish.html');
+	}
+	</script>
+	
+	<script type="text/javascript" src="http://img.$host/scripts/usr/register.js"></script>
+	
+	
+	</div>
+</div>
+
+<div class="clearfix"></div>
+
+<div id="footer">
+Copyright 2012 © 佛山市万绿园餐饮管理有限公司       全国统一客服热线：400-678-8888
+<!-- 网站标语-->&nbsp;&nbsp;
+</div>
+
+	
+	
+</body>
+</html>

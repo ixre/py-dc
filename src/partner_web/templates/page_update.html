@@ -1,0 +1,25 @@
+$def with(title,content,msg)
+<!DOCTYPE html>
+<html>
+<head>
+	<title>分店管理</title>
+	<style type="text/css">
+		h1{font-size:14px;border-bottom:solid 1px #e5e5e5;line-height:30px;}
+		div.msg{color:green;margin:15px 0;}
+		textarea{font-size:14px;padding:10px;}
+	</style>
+</head>
+<body>
+	<h1>修改$title</h1>
+	<form action="" method="post">
+		<div class="msg">$:msg</div>
+		<textarea name="content" id="content" rows="8" style="width:500px">$content</textarea>
+		
+		<br />
+		
+		<input type="submit" value="修改"/>
+	
+	</form>
+	
+</body>
+</html>

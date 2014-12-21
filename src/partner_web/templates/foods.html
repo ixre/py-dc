@@ -1,0 +1,86 @@
+$def with(dataurl)
+<!DOCTYPE html>
+<html>
+<head>
+	<title>菜单管理</title>
+	<link rel="stylesheet" type="text/css" href="/static/easyui/js/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/static/easyui/js/themes/icon.css">
+	<script type="text/javascript" src="/static/easyui/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/easyui/js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/static/easyui/js/locale/easyui-lang-zh_CN.js"></script>
+	<script>
+		$$(function(){
+			var lastIndex;
+			var elem=$$('#tt');
+			elem.datagrid({
+				columns:[[
+					{field:'name',title:'名称',width:200,align:'center'},
+					{field:'cname',title:'分类',width:100,align:'center'},
+					{field:'price',title:'价格',width:80,sortable:true,align:'center',
+						sorter:function(a,b){
+							return (a>b?1:-1);
+						}},
+					{field:'percent',title:'折扣',width:80,sortable:true,align:'center',
+						sorter:function(a,b){
+							return (a>b?1:-1);
+						}},
+
+					{field:'note',title:'备注',width:150,rowspan:2,align:'center'},
+					{field:'updatetime',title:'修改时间',width:150,align:'center'},
+					{field:'id',title:'操作',width:102,align:'center',
+						formatter:function(value,rec){
+							return '<a href="javascript:update(\''+rec.id+'\')">修改</a>|<a href="javascript:del(\''+rec.id+'\')">删除</a>';
+						}
+					}
+				]],
+
+				toolbar:[{
+					text:'添加新菜单',
+					iconCls:'icon-add',
+					handler:function(){
+					   location.replace('index?m=food&act=newfooditem&returnUri='+encodeURIComponent(location.href));
+					}
+				}],
+
+				onBeforeLoad:function(){
+					$$(this).datagrid('rejectChanges');
+				},
+				onClickRow:function(rowIndex){
+					
+					if (lastIndex != rowIndex){
+						elem.datagrid('endEdit', lastIndex);
+						elem.datagrid('beginEdit', rowIndex);
+					}
+					lastIndex = rowIndex;
+				}
+			});
+
+			
+		});
+
+		function del(id){
+			$$.messager.confirm('操作提示', '确定要删除吗？删除后将不能恢复！',function(r){
+				if(r){
+			           $$.ajax({
+					url:'index',
+					data:'m=food&act=delfood&id='+id,
+					type:'POST',
+					success:function(){$$('#tt').datagrid('reload');}
+				   });
+				}
+			});
+		}
+		function update(id){
+			location.replace('index?m=food&act=updateitem&id='+id+'&returnUri='+encodeURIComponent(location.href));
+		}
+	</script>
+</head>
+<body>
+	<table id="tt" style="width:900px;height:auto;"  singleSelect="true"
+			pagination="true" rownumbers="true"
+			idField="id" url="$dataurl"
+			pageList="[10,5,20]"	
+			>
+	</table>
+</body>
+</html>

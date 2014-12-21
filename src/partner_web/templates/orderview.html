@@ -1,0 +1,90 @@
+$def with(request,order,o_member,o_state,o_paymethod,o_sub,elem_handle)
+<!doctype html>
+<html>
+<head>
+	<title>查看订单</title>
+	<link rel="Stylesheet" href="/static/css/common.css"/>
+	<link rel="stylesheet" type="text/css" href="/static/easyui/js/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/static/easyui/js/themes/icon.css">
+	<script type="text/javascript" src="/static/easyui/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/easyui/js/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/static/easyui/js/locale/easyui-lang-zh_CN.js"></script>
+	<style type="text/css">
+		div.metainfo{position:relative;}
+		div.metainfo p{border-bottom:dotted 1px #e0e0e0;width:300px;}
+		div.metainfo .item{position:absolute;top:5px;left:350px;border:solid 1px #FFCC33;
+			background:#FFFFDD;z-index:10;padding:5px 10px;
+		}
+		p span.label{width:100px;display:block;float:left;}
+	</style>
+</head>
+<body>
+	
+	<h3>订单信息 <span style="float:right;font-weight:normal;font-size:12px;padding-right:100px;"><a href="$:request.returnuri">返回</a></span></h3>
+	<div class="metainfo">
+	<div class="item">
+		<b>订单内容：</b><br />
+		$:order['itemsinfo'].replace('\r\n','<br />')
+	</div>
+
+	<p>
+		<span class="label">订单号：</span>$order['id']
+	</p>
+	<p>
+		<span class="label">订单金额：</span>￥<strong style="color:green">$order['pay']</strong>&nbsp;&nbsp;&nbsp;(付款方式：$o_paymethod)
+	</p>
+	<p>
+		<span class="label">订单状态：</span>$:o_state
+	</p><p>
+		<span class="label">配送分店：</span>$o_sub
+	</p>
+	<p>
+		订单备注：
+		<div class="clearfix">$:order['note']</div>
+	</p>
+	
+	<p style="border:solid 1px #e5e5e5;padding:5px;background:#f8f8f8">
+	   <b>会员信息：</b><br/>
+	   姓名:$:o_member['realname']
+	   (帐号：$:o_member['username'])<br/>
+	   电话:$:o_member['phone']<br />
+	   送餐地址：$:o_member['address']<br/ >
+	 
+	</p>
+
+	</div>
+
+<br/><br /><br />
+	<b style="color:green">设置状态：</b>&nbsp;<br />
+
+		<!-- 处理订单 -->
+		$:elem_handle
+
+	</div>
+	<script type="text/javascript">
+		function setState(scode){
+			var subid=''
+			if(document.getElementById('subid')){
+				subid=$$('#subid').combobox('getValue')
+				if(subid==''){
+					$$.messager.alert('操作提示','请先添加分店后再处理订单', 'info',function(){location.href='index?m=subm&act=list';});
+					return false;
+				}
+			}
+			$$.ajax({
+				url:'index',
+				data:'m=order&act=setstate&state='+scode+'&id=$order['id']&subid='+subid,
+				type:'POST',
+				dataType:'text',
+				success:function(x){
+					$$.messager.alert('操作提示',x==''?'操作成功!':x, 'info',function(){
+						if(x==''){
+						   location.reload();					
+						}					
+					});
+				},
+				error:function(x){alert('发生异常\r\n'+x);document.write(x.toString());}
+			});
+		}
+	</script>
+</html>

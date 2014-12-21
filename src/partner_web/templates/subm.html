@@ -1,0 +1,102 @@
+$def with()
+<!DOCTYPE html>
+<html>
+<head>
+	<title>分店管理</title>
+	<link rel="stylesheet" type="text/css" href="/static/easyui/js/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/static/easyui/js/themes/icon.css">
+	<script type="text/javascript" src="/static/easyui/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/easyui/js/jquery.easyui.min.js"></script>
+	<script>
+		$$(function(){
+			var lastIndex;
+			var elem=$$('#tt');
+
+			elem.datagrid({
+				toolbar:[{
+					text:'添加',
+					iconCls:'icon-add',
+					handler:function(){
+						elem.datagrid('endEdit', lastIndex);
+						elem.datagrid('appendRow',{
+							cpid:'',
+							name:'',
+							idx:'0',
+							state:'1'
+						});
+						lastIndex = elem.datagrid('getRows').length-1;
+						elem.datagrid('selectRow', lastIndex);
+						elem.datagrid('beginEdit', lastIndex);
+					}
+				},'-',{
+					id:'btnsave',
+					text:'保存',
+					iconCls:'icon-save',
+					handler:function(){
+					     var rows=elem.datagrid('getChanges','inserted');
+					     if(rows.length>0){
+					     $$.ajax({
+						type:'POST',
+						datatype:'text',
+						url:'index',
+						data:'m=subm&act=do&do=add&_items='+JSON.stringify(rows),
+						success:function(x){
+						   $$.messager.alert('操作提示','添加成功!','');
+						}
+					     });
+					    }
+					     var uprows=elem.datagrid('getChanges','updated');
+					     if(uprows.length>0){
+					     	 $$.ajax({
+								type:'POST',
+								datatype:'text',
+								url:'index',
+								data:'m=subm&act=do&do=update&_items='+JSON.stringify(uprows),
+								success:function(x){
+								   /*
+								    var _am=x==''?'删除成功':x;
+								    var _at=x==''?'':'error';
+								    $$.messager.alert('操作提示',_am,_at);*/
+								    $$.messager.alert('操作提示','修改成功!','');
+								}
+							     });
+					     }
+						
+					     elem.datagrid('acceptChanges');
+					}
+				}
+				],
+				onBeforeLoad:function(){
+					$$(this).datagrid('rejectChanges');
+				},
+				onClickRow:function(rowIndex){
+					
+					if (lastIndex != rowIndex){
+						elem.datagrid('endEdit', lastIndex);
+						elem.datagrid('beginEdit', rowIndex);
+					}
+					lastIndex = rowIndex;
+				}
+			});
+		});
+
+	</script>
+</head>
+<body>
+	状态：1：表示正常, 0则不能使用
+	<table id="tt" style="width:900px;height:auto" rownumbers="true"
+			title="分店管理"  singleSelect="true"
+			idField="id" url="index?m=subm&act=list&ajax=1">
+		<thead>
+			<tr>
+				<th field="name" width="200" align="center" editor="text">分店名称</th>
+				<th field="address" width="300" align="left" editor="text">分店地址</th>
+				<th field="phone" width="250" editor="text">电话号码(可3个，逗号隔开)</th>
+				<th field="idx" width="40" align="center" editor="numberbox">排序</th>
+				<th field="state" width="40" align="center" editor="{type:'checkbox',options:{on:'1',off:'0'}}">状态</th>
+			</tr>
+		</thead>
+
+	</table>
+</body>
+</html>

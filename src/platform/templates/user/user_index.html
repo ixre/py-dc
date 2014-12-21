@@ -1,0 +1,58 @@
+$def with(host,usrtpl,member,account,local)
+$:usrtpl.top('用户中心')
+
+
+	
+<div id="main" class="mainwrap">
+    <div class="side">
+		$:usrtpl.menu('会员首页')
+   </div>
+<div class="main" style="height:500px">
+	
+	
+	<div style="padding:30px 50px;position:relative;border:solid 1px #f0f0f0;">
+		<div class="avatar">
+			<img src="$member['avatar']" alt="用户头像"/>
+		</div>
+		
+		<div class="profile">
+			<p><label>真实姓名：</label>$:('<span class="red">未填写</span>' if member['realname']==None or member['realname']=='' else member['realname'])
+				[$('先生' if member['sex']=='male' else '女士')]		
+			</p>
+			<p><label>联系电话：</label>$member['phone']</p>
+			<p><label>联系地址：</label>$member['address']</p>
+			<p><label>Q&nbsp;Q号码：</label>$member['qq']&nbsp;</p>
+			<p><label>电子邮箱：</label>$member['email']&nbsp;</p>
+			<p><label>注册时间：</label>$member['regtime']</p>
+		</div>
+
+	<div class="m20">
+		[ <a href="modify_profile">修改资料</a> ] &nbsp;
+		[ <a href="order_backcash">我的收入</a> ] 
+	</div>
+		
+	<div class="m20">
+		登录地址：$:local&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+		共支付金额：￥ $account['totalpay'] 元
+		&nbsp;账户余额：￥$account['balance'] 元
+	</div>
+
+	</div>
+
+
+</div>
+
+</div>
+
+<style type="text/css">
+.red{color:red;}
+.m20{margin-top:30px;border-top:dashed 1px #79959a;padding-top:30px}
+.local{color:green;}
+.ip{color:#666;}
+.profile{position:absolute;left:200px;top:28px;font-size:11pt;}
+.profile p{margin:0;padding:0;line-height:23px;}
+.profile label{width:100px;float:left;display:block;}
+</style>
+
+$:usrtpl.footer()
+

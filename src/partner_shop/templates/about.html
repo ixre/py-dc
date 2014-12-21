@@ -1,0 +1,69 @@
+$def with(partner,tpl)
+<!doctype html>
+<html>
+<head>
+	<title>关于我们</title>
+	<link rel="stylesheet" type="text/css" href="http://img.$tpl.host/shop/style/wly/wly.css"/>
+	<script type="text/javascript" src="http://img.$tpl.host/scripts/global.js"></script>
+	<style type="text/css">
+		h1{color:#018116;margin:30px;font-size:16px;font-family:'微软雅黑';text-align:center;border-bottom:dotted 1px #e5e5e5;padding-bottom:20px;}
+		h2{color:#7ec07f;font-size:14px;}
+		p{font-size:14px;text-indent:2em;}
+		div.desc{width:600px;margin:0 auto;line-height:20px;color:#666;}
+		
+	</style>
+</head>
+<body>
+
+<div id="top">
+	<div class="content">
+		<span class="lb">$:tpl.notice(partner['id'])</span>
+		<span class="right">中午好，欢迎您光临！<a href="#">注册</a> | <a href="#">登录</a></span>
+	</div>
+</div>
+
+
+
+<div id="main">
+		<h1>公司介绍</h1>
+		
+
+
+		<div class="desc">
+		<h2>公司背景</h2><p>
+公司全名是万绿园餐饮管理有限公司，二O一二年成功在国家工商局（商标管理局）注册了“万绿园”商标品牌。万绿园餐饮管理有限公司公司成立于二○○九年九月，是一家集咨询、研究、生产加工“万绿园”系列营养配餐为一体的连锁经营式现代企业，公司拥有全国知名品牌“万绿园”的全部知识产权，同时负责全国范围内万绿园品牌的连锁店的发展，主要项目有营养配餐咨询，营养配餐制作，在线订餐，在线商城等业务。<br />
+</p>	<div class="center"><img src="http://img.$tpl.host/shop/style/wly/about.jpg" alt="关于万绿园" /></div>
+
+<p>公司一直以来坚持以创办中国一流的营养配餐品牌为目标。坚持“努力创新、科学管理、独到经营”的原则，以科学咨询、权威知识、采用先进的设备和优质原料，为经营者提供共赢的格局。同时公司遵循市场规律，不断完善企业的经营管理、营养咨询和餐品的制作工艺，致力于创建具有中国特色的体系。公司的管理和发展趋势在国内饮食界有口皆碑，在同类企业中取得了领先地位，享有极高的知名度和美誉度。目前公司已经建立了整套的经营管理模式和全面的配套设施，拥有了一批优秀的管理人才，这使得事业取得迅速稳健的发展，咨询业务已遍布全国市场。
+</p> 
+
+<h2>企业文化</h2>
+我们的目标：打造商务营养餐中国第一品牌！快速实现营养平民化!<br />
+我们的使命：用最短的时间帮助最多的中国人远离亚健康！<br />
+我们的宗旨：传播健康饮食文化，强我民族中华！<br />
+我们的价值观：自立立他， 德行天下！<br />
+我们的口号：以客为尊，服务至上！<br />
+我们的信念：全力以赴，突破极限，向不可能挑战！<br />
+我们的座右铭：认真、用心、努力、负责任！<br />
+我们成功的秘诀：团队精神！团队精神！团队精神！
+		
+		</div>
+</div>
+
+<div class="clearfix"></div>
+
+$:tpl.footer(partner)
+
+<script type="text/javascript">
+  function chk(){
+	var addr=document.getElementById('address'),
+	    phone=document.getElementById('phone');
+	var result=addr.value != ''&& phone.value != '';
+	if(!result){alert('请填写地址和联系电话！');return false;}
+	else{
+		j.asyncSubmitForm(0,false);
+	}
+  }
+</script>
+</body>
+</html>

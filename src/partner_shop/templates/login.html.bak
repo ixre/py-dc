@@ -1,0 +1,114 @@
+$def with(partner,tpl,msg,returnuri)
+<!doctype html>
+<html>
+<head>
+	<title>用户登录</title>    
+	<link rel="Stylesheet" href="http://www.xcydg.com/style/common.css" type="text/css" />
+	<link rel="Stylesheet" href="http://www.xcydg.com/style/css/style.css" type="text/css" />
+	<script type="text/javascript" src="http://img.$tpl.host/scripts/global.js"></script>
+<style type="text/css">
+  body{background:none;}
+   #main{position:relative;}
+   #main #login{position:absolute;right:10px;top:5px;background:url(http://www.xcydg.com/uploads/image/201210/20121025074459_1584.gif) no-repeat;width:270px;padding:15px 0 10px 30px;}
+   #login p{line-height:32px;clear:both;}
+   #login label{width:75px;display:block;float:left;opacity:0;filter:alpha(opacity=0);}
+   #login input{border:none;}
+   #btn{position:absolute;top:130px;left:80px;width:100px;height:40px;opacity:0;filter:alpha(opacity=0);}
+
+</style>
+
+</head>
+<body>
+
+<div id="top">
+  <a class="logo" href="http://www.xcydg.com"></a>
+  <div id="logo" onclick="location.href='/'" style="cursor:pointer;"></div>
+  <div class="toplink">
+   <a href="http://www.xcydg.com/service/tuanshan.html">团膳服务</a>
+   <a href="http://www.xcydg.com/about/contact.html">联系我们</a>
+
+   <a href="http://www.xcydg.com/about/aboutus.html"><span style="color:green">关于万绿园</span></a>
+</div>
+<div id="navigator"><div class="left"></div><div class="right"></div><div class="navs"> <ul> <li class="current"><a href="/" target="">首页</a></li><li><a href="http://dc.xcydg.com" target="_blank"><span style="color:orange">在线订餐</span></a></li><li><a href="/yingyang/" target="">膳食营养</a></li><li><a href="/service/tuanshan.html" target="">餐饮服务</a></li><li class="last"><a href="http://mall.yyc668.com" target="_blank">商城</a></li> </ul> <div class="clearfix"></div> </div> </div>
+
+
+
+<div id="main">
+    <div class="clearfix sitemap">»&nbsp;网站首页 > 会员登录</div>
+	<div id="login">
+		<form method="post" action="/login.html">
+			<h1 style="display:none">
+				会员登录
+			</h1>
+<input name="returnuri" value="$returnuri" type="hidden" /> 
+			<p>
+				<label>用户名：</label> <input name="username" id="username" type="text" /><span class="tip"></span> 
+			</p>
+
+			<p>
+				<label>密码：</label> <input name="password" id="password" type="password" /><span class="tip"></span> 
+			</p>
+			<p>
+				<label>&nbsp;</label><span id="tip">&nbsp;</span> 
+			</p>
+			<p>
+				<label>&nbsp;</label><input value="登录" id="btn" onclick="return login()" type="submit" /> 
+			</p>
+
+		</form>
+	</div>
+<img src="http://www.xcydg.com/uploads/image/201210/20121025073408_2265.gif" alt="" /> 
+</div>
+<img src="http://www.xcydg.com/uploads/image/201210/20121025074504_7738.gif" alt="" style="margin-left:30px;" />
+ <img src="http://www.xcydg.com/uploads/image/201210/20121025074514_2482.gif" alt="" /> 
+
+
+
+
+
+<!--
+<div id="main" style="background:none">
+	<div id="login">
+	<form method="post" action="/login.html">
+		<h1>会员登录</h1>
+		$if msg:
+			<div class="msg" style="padding-left:15px;">$:msg</div>
+		<input type="hidden" name="returnuri" value="$returnuri"/>	
+		<p><label>用户名：</label>
+		   <input type="text" name="username" id="username"/><span class="tip"></span>
+		</p><p><label>密码：</label>
+		   <input type="password" name="password" id="password"/><span class="tip"></span>
+		</p>
+		<p><label>&nbsp;</label><span id="tip">&nbsp;</span></p>
+		<p><label>&nbsp;</label><input type="submit" value="登录" onclick="return login()"/>
+	</form>
+	</div>
+</div>-->
+
+<div class="clearfix"></div>
+
+<div id="footer">
+Copyright 2012 © 佛山市万绿园餐饮管理有限公司       全国统一客服热线：400-678-8888
+<!-- 网站标语-->&nbsp;&nbsp;
+</div>
+
+
+
+<script type="text/javascript">
+function tiperr(msg){
+	if(msg==1){
+		msg='用户名或密码不正确！';
+	}
+	document.getElementById("tip").innerHTML='<span style="color:red">'+msg+'</span>';
+}
+function login(){
+	if(j.val('username')==''){
+	tiperr('请输入会员用户名');return false;	
+}else if(j.val('password')==''){
+	tiperr('请输入密码');return false;	
+}else{j.form.asyncSubmit(0,!true);}return true;
+}
+</script>
+
+</body>
+</html>

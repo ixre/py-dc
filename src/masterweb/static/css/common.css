@@ -1,0 +1,15 @@
+a:link,a:visited{color:#0066cc;outline:none;}
+a:hover{color:#006699;}
+.center{text-align:center;}
+.clearfix{clear:both;}
+.rightalign{text-align:right;padding-right:30px;}
+.rtalign{text-align:right;}
+
+.shadow{padding:3px;background:#d0d0d0;}
+.shadow .content{border:solid 1px #006699;padding:1px;margin:-5px 0 0 -5px;background:white;line-height:20px;}
+
+.tipbor{border-bottom:dotted 1px #006699;padding:5px;color:#006699}
+
+div.hr{border-bottom:solid 1px #f0f0f0;height:1px;}
+
+#footer{text-align:center;font-size:12px;}

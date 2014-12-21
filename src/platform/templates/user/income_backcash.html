@@ -1,0 +1,34 @@
+$def with(host,usrtpl,member,orders,states,pagedHtml)
+$:usrtpl.top('订单返现业务信息')
+
+	
+<div id="main" class="mainwrap">
+    <div class="side">
+		$:usrtpl.menu('订单返现业务信息') <br />
+		
+   </div>
+<div class="main">
+	<table cellspacing="1" class="tb">
+		<tr>
+			<th>产生时间</th>
+			<th>收入金额</th>
+			<th>详细</th>
+		</tr>
+		$if len(orders)==0:
+			<tr><td class="tdred" colspan="3">无收入记录</td></tr>
+		$else:
+			$for o in orders:
+				<tr>
+					<td>$o['recordtime']</td>
+					<td>￥$o['fee']</td>
+					<td style="text-align:left">$:o['log'].replace('\r\n','<br />')</td>
+				</tr>
+	</table>
+
+<div class=" paged">
+	$:pagedHtml
+</div>
+</div>
+</div>
+$:usrtpl.footer()
+

@@ -1,0 +1,210 @@
+$def with(tpl,partner,subs,ele_cate,ele_food)
+<!DOCTYPE html>
+<html>
+<head>
+<title>$:partner['name']网络餐厅-网上订餐|团膳|外卖外送</title>
+<link rel="stylesheet" type="text/css" href="http://img.$tpl.host/shop/style/default/style.css"/>
+<link rel="stylesheet" type="text/css" href="http://img.$tpl.host/shop/x1/css/style.css"/>
+<script type="text/javascript" src="http://img.$tpl.host/scripts/global.js"></script>
+<script type="text/javascript" src="http://img.$tpl.host/scripts/cart.js"></script>
+<script type="text/javascript" src="http://img.$tpl.host/shop/x1/js/common.js"></script>
+
+
+
+</head>
+<body class="shop_bg">
+<div class="top_bar">
+    <div class="w960">
+         <div class="fl top_left">
+             <div class="s_logo1 fl" style="height:33px;margin:10px 0;color:white;font-size:14px;">
+			$:partner['name']网上订餐平台
+	</div> </div>
+	<div class="fl top_nav">
+              <ul>
+                   <li ><a href="/">首页</a></li>
+                   <li class="cur"><a href="#">网上订餐</a></li>
+                   <li><a href="#">订餐指南</a></li>
+                   <li><a href="#">联系我们</a></li>
+              </ul>
+         </div>
+		          <div class="fr top_menu">
+              <ul>
+			<li><a class="m_r_link" href="/passport/login">登录</a></li>
+			<li><a href="/passport/register" class="m_r_link">快速注册</a></li>
+              </ul>
+         </div>
+		<div class="clearfix"></div>
+    </div>
+</div>
+
+<div class="shop_main_box">
+	<div class="crumb"></div>
+	<div class="shop_page w830 mt"> 
+		<div class="fl left_shop_box">
+			<div class="top_shop_info myclear">
+                          <div class="ti_shop_info fl">
+                                <h1>欢迎光临<span class="font_green">$:partner['name']</span>订餐！</h1>
+                                
+                                <div id="leftInfo" class="lfet_bar_item">
+                                     <dl class="myclear shop_address">
+                                        <dt class="fl" >地址：</dt>
+                                        <dd class="fl">$:partner['address']</dd>
+                                     </dl>
+                                     <dl class="myclear shop_tel">
+                                        <dt class="fl">服务电话：</dt>
+                                        <dd class="fl" id="left_tel">$:partner['tel']</dd>  
+                                     </dl>
+				</div>
+				
+				
+			
+                          </div>
+
+<div class="clearfix"></div>
+			<div>
+				
+
+			</div>
+                        <div class="clearfix"></div>			</div>
+			<div class="t_yellow_tips mtt"><p>提示：由于物价变动，部分菜品、价格可能有变，详情请以电话确认为准。</p></div>
+			<div id="inShop" class="menu" oncopy="return copyCode()">
+
+	            					<div id="left_menu_pop" class="left_s_pop" top="50" theTop="311" start="200" style="top:311px;position:fix;">
+					<div class="menu_kinds" onclick="clickOpen('menu_kinds');" onmouseout="displayBox('menu_kinds',false)">菜单分类</div>
+					<div class="shop_feedback" onclick="clickOpen('feedback1',true,true);clickOpen('rightcart',false);clickOpen('cartHidden',true)">纠错</div>  
+	            	<div id="menu_kinds" class="menu_kinds_pop" style="display:none" onmouseover="displayBox('menu_kinds',true)">
+	                	<div class="mk_arrow"></div>
+	                			<div class="mk_main">
+	                               <ul onclick="clickOpen('menu_kinds')">
+	                               		  	$:ele_cate
+			
+	                               		</ul>
+	                            </div>
+	                </div>
+	            </div>
+<div id="menu">
+
+			$:ele_food
+
+			<div id="fditems">
+
+					<div class="" style=" text-align:center; height:32px; padding:80px 0 0 150px">
+						<img src="http://img.wdian.net/shop/x1/images/loadingapple.gif"  class="fl"/>
+						<span  class="fl" style="padding:10px 10px; display:inline-block;color:#acacac;">加载中，请稍后…</span></div></div>
+			</div>
+			<script type="text/javascript">
+				j.ajax.post('?','action=getitems',function(x){
+				  j.$$('fditems').innerHTML=x;
+				},function(x){j.$$('fditems').innerHTML='加载失败';});			
+			</script>
+
+							
+
+		</div><!--menu关闭-->
+
+		</div>
+		<div class="fr right_model" style="position:relative" id="sidecontainer">
+
+		
+		<div id="plcart">
+			<h3>我的餐盒</h3>
+			<div class="cart"></div>
+  			<div class="submit"><a class="green_btn" href="/order"><span>提交订单</span></a></div>
+		</div>
+
+
+				  <div class="rm_box r_map_box mb">
+                      <h4 class="rb_tit">地图位置</h4>
+                      <div id="pos_map" class="r_map_area mb" style="width:200px;height:200px">
+		     </div>
+                  </div>
+                  <div class="v_line3 myclear"></div>
+                  <div class="rm_box r_shop_box">
+                      <div class="nearly_shop mtt">
+			<p style="margin:15px 0 5px 0"><span class="font_green">提示：</span>您可以直接拨打下面分店的<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电话订餐。
+							<br />
+						<ul class="subs">
+							$for i in xrange(0,len(subs)):
+							    <li><strong>$:(i+1) . $:subs[i]['name']</strong>&nbsp;
+									$:('<span style="color:#666">[休业中]</span>' if subs[i]['state']==0 else '<span class="green">[营业中]</span>')
+									<br />
+									<p>
+										订餐电话：$subs[i]['phone'] <br />送餐地址：$subs[i]['address']
+									</p>
+								</li>
+						</ul>
+						
+				</p>
+
+                      </div>
+                   </div>
+                  <div class="v_line3 myclear"></div>
+                  <div class="rm_box mb">
+                      <h4  class="rb_tit mt"><a href="javascript:;" class="fr" style="font-weight:normal;" class="fr" style="font-weight:normal; color:#888888;">清除</a>浏览历史</h4>
+                      <ul id="hisShopList" class="sr_h_shop">
+                      	                      </ul>
+                  </div>
+				  <div class="v_line3 myclear mbb"></div>
+                  <div id="AD2" class="rm_box mt" start="990" top="35">
+				  </div>			<div id="backToTop" class="to_top" title="回到顶部" href="##" style="position:fixed;display:none">↑回到顶部</div>
+		</div>
+		<div class="clearfix"></div>
+    </div>
+</div>
+							
+                           
+<script>
+	backToTop(990);
+	if(!window.XMLHttpRequest){tagFloat('cartHidden','bottom',35);
+		tagFloat('rightcart','bottom',340);
+		tagFloat('notNear','center');
+		tagFloat('feedback1','center');
+	}
+</script>
+
+
+$:tpl.footer(partner)
+
+<script type="text/javascript" src="http://api.go2map.com/maps/js/api_v2.5.js"></script>
+<script type="text/javascript">
+var myLatLng = new sogou.maps.Point(0,0);
+var myOptions = {
+  zoom: 15,
+  center: myLatLng,
+  mapControlType:5
+};
+var map = new sogou.maps.Map(document.getElementById("pos_map"), myOptions);
+function callback(a){//回调函数 标点
+     if(a.status=='ok'){
+         var geometry=a.data[0];
+         var marker= new sogou.maps.Marker({
+             map:map,
+             title:geometry.address,
+             position:geometry.location
+         });
+	map.setCenter(marker.getPosition());
+     }
+ 
+};
+var request={address:{addr:'$:partner['address']',city:'佛山'}}
+var geo=new sogou.maps.Geocoder();
+geo.geocode(request,callback);
+
+var plcart=document.getElementById('plcart');
+function fixCartBasket(){
+	setInterval(function(){
+	   if(document.documentElement.scrollTop>30){
+		document.getElementById('plcart').style.top='33px'
+	   }else{
+			if(plcart.style.display=='block'){
+				document.getElementById('sidecontainer').style.padding=(plcart.offsetHeight+10)+"px 0 0 0"
+			}
+		document.getElementById('plcart').style.top='63px'
+	   }
+	},5);
+}
+cart.init(plcart.id,false);
+fixCartBasket();
+</script>
+
+</body></html>

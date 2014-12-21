@@ -1,0 +1,136 @@
+$def with(catejson)
+<!DOCTYPE html>
+<html>
+<head>
+	<title>分类</title>
+	<link rel="stylesheet" type="text/css" href="/static/easyui/js/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="/static/easyui/js/themes/icon.css">
+	<script type="text/javascript" src="/static/easyui/js/jquery.min.js"></script>
+	<script type="text/javascript" src="/static/easyui/js/jquery.easyui.min.js"></script>
+	<script>
+		
+		var categories =$:catejson;
+                /*
+		function productFormatter(value){
+			for(var i=0; i<products.length; i++){
+				if (products[i].productid == value) return products[i].name;
+			}
+			return value;
+		}*/
+	  
+ 		var gdfunc;
+
+		$$(function(){
+			var lastIndex;
+			var elem=$$('#tt');
+
+			elem.datagrid({
+				toolbar:[{
+					text:'添加',
+					iconCls:'icon-add',
+					handler:function(){
+						$$('#tt').datagrid('endEdit', lastIndex);
+						$$('#tt').datagrid('appendRow',{
+							cpid:'0',
+							name:'',
+							idx:'0'
+						});
+						lastIndex = $$('#tt').datagrid('getRows').length-1;
+						$$('#tt').datagrid('selectRow', lastIndex);
+						$$('#tt').datagrid('beginEdit', lastIndex);
+					}
+				},'-',{
+					text:'删除',
+					iconCls:'icon-remove',
+					handler:function(){
+						var row = $$('#tt').datagrid('getSelected');
+						if (row){
+							$$.messager.confirm('系统提示', '您确定要删除此分类吗?', function(r) {
+                   			  if (r) {
+									
+							$$.ajax({
+								type:"POST",
+								url:'index',
+								data:'m=food&act=delcategory&id='+row['id'],
+								success:function(){
+									var index = $$('#tt').datagrid('getRowIndex', row);
+									$$('#tt').datagrid('deleteRow', index);
+								}
+							});
+			
+								}
+               				 });
+            			}
+					}
+				},'-',{
+					id:'btnsave',
+					text:'保存',
+					iconCls:'icon-save',
+					handler:function(){
+					     var rows=$$('#tt').datagrid('getChanges','inserted');
+					     if(rows.length>0){
+					     $$.ajax({
+						type:'POST',
+						datatype:'text',
+						url:'index',
+						data:'m=food&act=category2&do=add&_items='+JSON.stringify(rows),
+						success:function(x){
+						   //alert('添加成功!');
+						}
+					     });
+					     
+					    }
+					     var uprows=$$('#tt').datagrid('getChanges','updated');
+					     if(uprows.length>0){
+					     	 $$.ajax({
+								type:'POST',
+								datatype:'text',
+								url:'index',
+								data:'m=food&act=category2&do=update&_items='+JSON.stringify(uprows),
+								success:function(x){
+								}
+							     });
+					     }
+						
+					     $$('#tt').datagrid('acceptChanges');
+					}
+				}
+				],
+				onBeforeLoad:function(){
+					$$(this).datagrid('rejectChanges');
+				},
+				onClickRow:function(rowIndex){
+					
+					if (lastIndex != rowIndex){
+						$$('#tt').datagrid('endEdit', lastIndex);
+						$$('#tt').datagrid('beginEdit', rowIndex);
+					}
+					lastIndex = rowIndex;
+				}
+			});
+		});
+
+	</script>
+</head>
+<body>
+	<div style="width:700px;" class="fl">
+	<div class="note" style="width:200px">
+		<h3>操作说明</h3>
+		1.添加后选择其他行，点击保存。<br />
+		2.父分类，建议都为'--'或0
+	</div>
+	<table id="tt" style="width:700px;height:auto" rownumbers="true"
+			title="食谱分类管理" iconCls="icon-edit" singleSelect="true"
+			idField="id" url="index?m=food&act=category&ajax=1">
+		<thead>
+			<tr>
+				<th field="id" width="80">编号</th>
+				<th field="cpid" width="120" editor="{type:'combobox',options:{valueField:'id',textField:'name',data:categories,required:true}}">父分类</th>
+				<th field="name" width="200" align="center" editor="text">分类名称</th>
+				<th field="idx" width="40" align="center" editor="numberbox">序号</th>
+			</tr>
+		</thead>
+
+	</table></div>
+</body>
+</html>

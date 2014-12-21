@@ -1,0 +1,40 @@
+$def with(msg)
+<!doctype html>
+<html>
+<head>
+	<title>合作商登录入口--WDian订餐系统</title>
+	<link rel="Stylesheet" href="/static/css/common.css"/>
+	<style type="text/css">
+		#authlogin{width:400px;margin:80px auto;}
+		.c1{border-bottom:solid 1px #e5e5e5;padding-bottom:5px;margin-bottom:15px;font-size:20px;line-height:25px;color:#006699;}
+		p{margin:5px 38px;font-size:14px;}
+		.msg{color:red;text-align:center;}
+	</style>
+</head>
+<body>
+		<div id="authlogin" class="shadow">
+		<div class="content" style="padding:50px">
+		<div class="center c1"><strong>合作商登录</strong></div>
+		<div class="msg">
+			$if msg!='':
+				$msg
+			$else:
+				请输入账号和密码后登录系统
+		</div>
+
+		<form method="post" action="" enctype="multipart/form-data">
+		<p>
+		用户：<input type="text" name="username"/></p>
+		
+		<p>
+		密码：<input type="password" name="password"/></p>
+		
+		<p style="text-align:right">
+		    <input type="submit" class="btn" value="登录" id="login"/></p>
+	           
+	           
+		</form></div>
+		</div>
+		
+	</body>
+</html>

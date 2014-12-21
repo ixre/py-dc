@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+	<title>确认订单--网上订餐系统</title>
+</head>
+<body>
+
+<div>
+     <p style="color:green">订单提交成功，即将为您送餐，如有任何问题，请致电!</p>
+     <script type="text/javascript">setTimeout(function(){location.replace('/');},4000);</script>
+</div>
+
+	<script type="text/javascript">
+		if(window.parent){
+			window.parent.alert('订单提交成功，即将为您送餐，如有任何问题，请致电!');
+			window.parent.location.replace('/index');
+		}
+	</script>
+
+</body>
+</html>
