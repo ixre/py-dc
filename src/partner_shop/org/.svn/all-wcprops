@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 42
+/svn/dc/!svn/ver/70/trunk/partner_shop/org
+END
+order.py
+K 25
+svn:wc:ra_dav:version-url
+V 51
+/svn/dc/!svn/ver/74/trunk/partner_shop/org/order.py
+END
+user.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/dc/!svn/ver/69/trunk/partner_shop/org/user.py
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 54
+/svn/dc/!svn/ver/23/trunk/partner_shop/org/__init__.py
+END
+sms.py
+K 25
+svn:wc:ra_dav:version-url
+V 49
+/svn/dc/!svn/ver/36/trunk/partner_shop/org/sms.py
+END
+utility.py
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/dc/!svn/ver/74/trunk/partner_shop/org/utility.py
+END
+encrypt.py
+K 25
+svn:wc:ra_dav:version-url
+V 53
+/svn/dc/!svn/ver/23/trunk/partner_shop/org/encrypt.py
+END
+db.py
+K 25
+svn:wc:ra_dav:version-url
+V 48
+/svn/dc/!svn/ver/51/trunk/partner_shop/org/db.py
+END
+conf.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/dc/!svn/ver/41/trunk/partner_shop/org/conf.py
+END
+food.py
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/dc/!svn/ver/77/trunk/partner_shop/org/food.py
+END
+member.py
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/dc/!svn/ver/68/trunk/partner_shop/org/member.py
+END

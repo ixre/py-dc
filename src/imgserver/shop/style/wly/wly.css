@@ -1,12 +1,14 @@
 body{background:none;}
-#main{width:950px;margin:10px auto 0 auto;padding:10px 0;position:relative;/*background:white url(ctbg.png) center -13px no-repeat;*/}
+#main{width:950px;margin:10px auto 0 auto;padding:10px 0;/*background:white url(ctbg.png) center -13px no-repeat;*/}
 #main .top{height:0px;}
-#main .content{overflow:hidden;}
-#main .content .side{width:230px;margin-right:-235px;float:left;overflow:hidden;}
-#main .main{width:auto;float:right;margin:0 0 0 235px;position:relative;}
+#main .content .side{width:225px;margin-right:-225px;float:left;}
+#main .content .main{width:auto;float:left;margin-left:225px;position:relative;}
+
+
 .b_footer{width:800px;margin:10px auto 0 auto;text-align:center;border-top:dashed 1px #e5e5e5;}
 .b_footer a:link,.b_footer a:visited{color:#018116;margin:0 3px;text-decoration:none;}
-.bggreen{background:#3EAF0E;}
+
+.bggreen{backgroud:#3EAF0E;}
 
 /* 餐盒 */
 #plcart{position:fixed;top:8px;display:none;z-index:10000000;width:225px;background:white;border:solid 1px #7ec07f;display:none;padding:1px;}
@@ -21,6 +23,7 @@ body{background:none;}
 .cart table td a{margin:0 2px;text-decoration:none;color:#7ec07f}
 .cart table .cart_q{width:15px;text-align:center;}
 
+
 .fd_items{position:relative;line-height:20px;float:left;width:160px;height:200px;
 	overflow:hidden;margin:0 5px 10px 12px;}
 .fd_items img{width:160px;height:120px;}
@@ -31,7 +34,7 @@ body{background:none;}
 .fd_items .zhekou{position:absolute;left:0;top:45px;background:white;padding:1px 10px;opacity:0.8;color:green;filter:alpha(opacity=89)}
 
 #menu{padding:0 1px 1px 1px;/*background:#7ec07f;*/margin-top:-1px;}
-#menu div.container{background:white;padding:10px;}
+#menu div.container1{background:white;padding:10px;}
 
 .fl{position:relative;width:500px;padding:0 10px;}
 .fl h2{color:#444;font-size:14px;border-bottom:solid 1px #e5e5e5;line-height:35px;margin-bottom:10px;}
@@ -62,11 +65,11 @@ body{background:none;}
 .subs p{font-size:10px;}
 
 div.notice{border-top:solid 1px #e5e5e5;margin:10px auto 0 auto;padding:10px;color:#3EAF0E;line-height:22px;}
-div.cuporn{position:absolute;right:5px;top:30px;width:160px;overflow:hidden;padding:0;}
+div.cuporn{background:#f0f0f0;position:absolute;right:5px;top:30px;width:160px;overflow:hidden;}
 div.cuporn h2{background:orange;color:white;padding:0 10px;line-height:20px;margin:0;}
 
 div.cuporn .fd_items{width:160px;height:160px;overflow:hidden;border-bottom:solid 1px white;}
-div.cuporn .fd_items img{width:160px;height:120px;}
+div.cuporn .fd_items img{width:150px;height:120px;}
 div.cuporn .fd_items em{display:none;}
 div.cuporn .fd_items .name{display:none;}
 div.cuporn .fd_items .price{position:absolute;color:#666;left:0;bottom:5px;}

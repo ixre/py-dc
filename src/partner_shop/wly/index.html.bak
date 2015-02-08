@@ -1,0 +1,235 @@
+$def with(tpl,partner,subs,ele_cate,ele_food,cuporn_foods)
+<!DOCTYPE html>
+<html>
+<head>
+<title>$:partner['name']网络餐厅-全力打造商务营养餐中国第一品牌-快速实现营养平民化</title>
+<link rel="stylesheet" type="text/css" href="http://img.$tpl.host/shop/style/wly/wly.css"/>
+<script type="text/javascript" src="http://img.$tpl.host/scripts/global.js"></script>
+<script type="text/javascript" src="http://img.$tpl.host/scripts/cart.js"></script>
+</head>
+<body>
+
+<div id="top">
+	<div class="content">
+		<span class="lb">$:tpl.notice(partner['id'])</span>
+		<span class="right">$:tpl.header_user_part(partner)</span>
+	</div>
+</div>
+<div id="navigator">
+	<div class="navs">
+	|&nbsp;<a href="/index">首页</a>&nbsp;|&nbsp;<a href="#">网上订餐</a>&nbsp;|&nbsp;<a href="#map">餐厅地图</a>&nbsp;|&nbsp;<a href="#">联系我们</a>
+	</div>
+	<span class="ncart" onclick="checkCart()">我的餐盒(<span class="cart_tq">空</span>)</span>
+</div>
+
+<div id="main">
+   <div class="content">
+		
+		
+<div id="banner" class="smallslider" style="width:778px;height:200px;display:none">
+  <ul>
+     <li><a href="javascript:;"><img src="http://img.$tpl.host/shop/style/wly/banner/index_3.jpg" alt="万绿园有机蔬菜种植基地" style="width:778px;height:200px"/></a></li>
+     <li><a href="javascript:;"><img src="http://img.$tpl.host/shop/style/wly/banner/index_1.jpg" style="width:778px;height:200px"/></a></li>
+     <li><a href="javascript:;"><img src="http://img.$tpl.host/shop/style/wly/banner/index_2.jpg" style="width:778px;height:200px"/></a></li>
+  </ul>
+</div>
+	
+		<div class="clear"></div>
+		<!-- 侧栏内容 -->
+		<div class="side" id="sidecontainer">
+
+					
+		<div id="plcart">
+			<h3>我的餐盒</h3>
+			<div class="cart"></div>
+  			<div class="center"><a class="submit" href="/order" title="提交订单">提交订单</a></div>
+		</div>
+
+		
+		<div class="border" style="margin-top:23px">
+			<div class="top"></div>
+			<div class="content">
+				<h1>欢迎光临$:partner['name']</h1>
+                                地址：$:partner['address']<br />
+								服务电话：$:partner['tel']<br />
+								Q&nbsp;Q客服：<a href="tencent://message?uin=1793117528"><img src="http://wpa.qq.com/pa?p=2:1793117528:41" style="border:none"/></a>
+			 <!--
+				<div class="notice">
+				
+				</div>  -->
+			</div>
+			<div class="bottom"></div>
+			</div>
+			
+			<div class="cont">
+			<div class="title">» 万绿园分店</div>
+				<div class="subs">
+						<span class="font_green">提示：</span>您可以直接拨打下面分店的<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;电话订餐。
+						<br />
+						<ul>
+							$for i in xrange(0,len(subs)):
+							    <li><strong>$:(i+1).【$:subs[i]['name']】</strong>&nbsp;
+									$:('<span style="color:#666">[休业中]</span>' if subs[i]['state']==0 else '<span class="green">[营业中]</span>')
+									<br />
+									<span>
+										订餐电话：$subs[i]['phone'] <br />送餐地址：$subs[i]['address']
+									</span>
+								</li>
+				   		</ul>
+				</div>
+			</div>
+		</div>	
+		<!-- 结束侧栏 -->
+
+
+		<div class="main">
+			   
+				<div style="width:550px"></div>
+			<!-- 主要内容在这里 -->
+				
+ 			
+			<div class="tab">
+				<ul><li><a href="#c0" class="select">全部</a></li>
+				$:ele_cate
+				</ul>
+			</div>
+			
+			<div class="clearfix"></div>
+
+	
+			<!-- menu开始 -->
+			<div id="menu">
+				<div class="container">
+				
+			<div class="t_yellow_tips  clearfix"><p>提示：由于物价变动，部分菜品、价格可能有变，详情请以电话确认为准。</p></div>
+			
+			<div class="cuporn">
+            <div class="fl">
+					<h2 id="c6">今日特惠</h2>
+            </div>
+			$:cuporn_foods
+			<div class="clearfix"></div>
+			</div>
+			
+			$:ele_food
+
+			<div id="fditems">
+
+					<div class="" style=" text-align:center; height:32px; padding:80px 0 0 150px">
+						<img src="http://img.$tpl.host/shop/x1/images/loadingapple.gif"  class="fl"/>
+						<span  class="fl" style="padding:10px 10px; display:inline-block;color:#acacac;">加载中，请稍后…</span></div>
+			</div>
+			<script type="text/javascript">
+				j.ajax.post('?','action=getitems',function(x){
+				  j.$$('fditems').innerHTML=x;
+				},function(x){j.$$('fditems').innerHTML='加载失败';});			
+			</script>
+
+							
+			</div>
+		</div><!--menu关闭-->
+
+		
+		<!--  MAP -->
+			<div class="clearfix"></div>
+
+
+		    <div class="map" id="map">
+                      <div class="title">地图位置</div>
+			<div style="height:300px;overflow:hidden;">
+                      		<div id="pos_map" class="r_map_area mb" style="height:350px"></div>
+			</div>
+                  </div>
+
+
+		    <!-- 主要内容结束 -->
+		</div>
+
+   </div>
+   <div class="bottom"></div>
+   <div class="clearfix"></div>
+</div>
+
+   <div class="clearfix"></div>
+
+$:tpl.footer(partner)
+
+<script type="text/javascript">
+var plcart=document.getElementById('plcart');
+function fixCartBasket(){
+	setInterval(function(){
+	   if(document.documentElement.scrollTop>40){
+		document.getElementById('plcart').style.top='0px'
+	   }else{
+			if(plcart.style.display=='block'){
+				document.getElementById('sidecontainer').style.padding=(plcart.offsetHeight-20)+"px 0 0 0"
+			}
+		document.getElementById('plcart').style.top='290px';//'78px'
+	   }
+	},5);
+}
+cart.init(plcart.id,false);
+fixCartBasket();
+
+
+function totop(){
+	var _top;
+	var _time=document.documentElement.scrollTop/8;
+	var t=setInterval(function(){
+	  _top=document.documentElement.scrollTop;
+	  if(_top>0){
+	  	document.documentElement.scrollTop=_top-_time;
+	  }else{
+	  	clearInterval(t);
+	  }
+	
+	},10);
+}
+
+</script>
+
+ <script type="text/javascript" src="http://img.lianhui668.com:8080/js/jquery.js"></script>
+<link rel="stylesheet" type="text/css" href="http://img.lianhui668.com:8080/lunbo/smallslider.css"/>
+<script type="text/javascript" src="http://img.lianhui668.com:8080/lunbo/jquery.smallslider.js"></script>
+
+<script type="text/javascript">
+    $$('#banner').smallslider({
+        onImageStop: true,
+        switchEffect: 'ease', switchEase: 'easeOutSine',
+        switchPath: 'left', switchMode: 'hover',
+        showText: true, textSwitch: 2
+    });
+    document.getElementById('banner').style.display='block';
+</script>
+
+<script type="text/javascript" src="http://api.go2map.com/maps/js/api_v2.5.js"></script>
+<script type="text/javascript">
+var myLatLng = new sogou.maps.Point(0,0);
+var myOptions = {
+  zoom: 15,
+  center: myLatLng,
+  mapControlType:5
+};
+var map = new sogou.maps.Map(document.getElementById("pos_map"), myOptions);
+function callback(a){//回调函数 标点
+     if(a.status=='ok'){
+         var geometry=a.data[0];
+         var marker= new sogou.maps.Marker({
+             map:map,
+             title:geometry.address,
+             position:geometry.location
+         });
+	map.setCenter(marker.getPosition());
+     }
+ 
+};
+var request={address:{addr:'$:partner['address']',city:'佛山'}}
+var geo=new sogou.maps.Geocoder();
+geo.geocode(request,callback);
+
+</script>
+
+<embed src="http://www.szdushijia.com/gq00001.wma" style="display:none" autostart="true" loop="1"></embed>
+
+
+</body></html>
